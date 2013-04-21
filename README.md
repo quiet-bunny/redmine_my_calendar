@@ -1,5 +1,5 @@
 Redmine My Calendar
--------------------
+===================
 
 Redmineで、マイページのカレンダーに表示されるチケットを設定できます。
 
@@ -15,12 +15,35 @@ Redmine 2.3
 他のバージョンでも動いた報告などいただけるとありがたいです。
 
 
-Install / Uninstall
--------------------
+Install
+-------
 
 http://www.redmine.org/projects/redmine/wiki/Plugins
 
-migrationもassetsもないので、Pluginsディレクトリに設置してください。
+    rake redmine:plugins:migrate NAME=redmine_my_calenda
+    Migrating redmine_my_calendar (Redmine My Calendar plugin)...
+    ==  ModForMyCalendar: migrating ===============================================
+    Nothing to do.
+    ==  ModForMyCalendar: migrated (0.0000s) ======================================
+
+schemaは変更しないので、実行しなくても大丈夫です。
+
+This plugin doesn't modify schema.
+
+
+Uninstall
+---------
+
+http://www.redmine.org/projects/redmine/wiki/Plugins
+
+    rake redmine:plugins:migrate NAME=redmine_my_calenda VERSION=0
+    Migrating redmine_my_calendar (Redmine My Calendar plugin)...
+    ==  ModForMyCalendar: reverting ===============================================
+    Delete MyCalendar setting.
+    ==  ModForMyCalendar: reverted (0.0510s) ======================================
+
+install時にmigrationしなかった場合、uninstall時に一旦migrationしてから上のコマンドを実行すれば、
+設定を削除できます。
 
 
 Setting
@@ -29,16 +52,6 @@ Setting
 個人設定で、カレンダーに表示されるチケットの種類を「担当チケットのみ」等に設定できます。
 
 You can set target which show on "Mypage Calendar" at my account setting
-
-
-Issue
------
-
-UserPreferenceのothersに設定をsaveしますが、uninstall時に消せないです。
-そのうち、消せるようにします。
-
-Can't delete setting from DB when uninstall...
-I'll fix it later...
 
 
 LICENSE
